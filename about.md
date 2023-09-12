@@ -16,7 +16,7 @@ title: About
     a. Name it "_posts/YYYY-MM-DD-post-title.md"
    
     b. Add front-matter
-    ```yml
+    ```yaml
     ---
     layout: post # not sure if you need this for sure
     title: Title
@@ -28,11 +28,28 @@ title: About
     d. If you have ChatGPT text you want to use, click the "Copy" button at the top right of the post in lieu of copying manually to preserve the markdown
    
     e. Save and commit
+
+5. If it's a page instead (which will make it appear in the header at the top of the website), do this instead
+
+   a. Name it page.md, doesn't have to be in a folder
+
+   b. Add front-matter
+   ```yaml
+   ---
+   layout: page
+   title: Title
+   ---
+   ```
+   Still not sure if you need the layout directive
+
+   c. Write it in markdown
+
+   d. Save and commit
    
-6. Add _config.yml
+7. Add _config.yml
    
     a. Add this:
-    ```yml
+    ```yaml
     remote_theme: jekyll/minima
     minima:
       skin: dark
