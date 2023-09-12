@@ -87,26 +87,25 @@ rectangles[i].length == 4
 ![Group 6.jpg](https://assets.leetcode.com/users/images/19b0dc90-96b1-421c-9071-156494a5a06f_1694551316.8918238.jpeg)
 
 
-   b. **Updates the total area**:
-      ```python
-      area += (rect[2] - rect[0]) * (rect[3] - rect[1])
-      ```
-      - Adds the area of the current rectangle to the total area.
+b. **Updates the total area**:
+  - Adds the area of the current rectangle to the total area.
+  ```python
+  area += (rect[2] - rect[0]) * (rect[3] - rect[1])
+  ```
 
-   c. **Handles the corners of the current rectangle**:
-      ```python
-      for point in [(rect[0], rect[1]), (rect[0], rect[3]), (rect[2], rect[3]), (rect[2], rect[1])]:
-          if point in corners:
-              corners.remove(point)
-          else:
-              corners.add(point)
-      ```
-      - The four corners of the current rectangle are created as tuples.
-      - The loop checks each corner: 
-          - If the corner is already in the `corners` set, it is removed.
-          - If it's not, it's added to the set. 
-      - This ensures that corners appearing twice are eliminated from the set.
-
+c. **Handles the corners of the current rectangle**:
+   - The four corners of the current rectangle are created as tuples.
+   - The loop checks each corner: 
+       - If the corner is already in the `corners` set, it is removed.
+       - If it's not, it's added to the set. 
+   - This ensures that corners appearing twice are eliminated from the set.
+  ```python
+  for point in [(rect[0], rect[1]), (rect[0], rect[3]), (rect[2], rect[3]), (rect[2], rect[1])]:
+      if point in corners:
+          corners.remove(point)
+      else:
+          corners.add(point)
+  ```
 3. **Final Checks**:
 
    a. **Check the four corners of the large rectangle**:
