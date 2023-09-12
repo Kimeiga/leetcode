@@ -58,58 +58,57 @@ from collections import defaultdict
 
 class Twitter:
 
-    def __init__(self):
-        # Initialize a dictionary to keep track of which users each user follows.
-        # Default value for each user (key) is an empty set.
-        self.userId2Followees = defaultdict(set)
+  def __init__(self):
+    # Initialize a dictionary to keep track of which users each user follows.
+    # Default value for each user (key) is an empty set.
+    self.userId2Followees = defaultdict(set)
 
-        # Initialize a list to store all tweets as pairs (userId, tweetId).
-        self.posts = []
+    # Initialize a list to store all tweets as pairs (userId, tweetId).
+    self.posts = []
 
-    def postTweet(self, userId: int, tweetId: int) -> None:
-        # Append a new tweet as a tuple (userId, tweetId) to the posts list.
-        self.posts.append((userId, tweetId))
+  def postTweet(self, userId: int, tweetId: int) -> None:
+    # Append a new tweet as a tuple (userId, tweetId) to the posts list.
+    self.posts.append((userId, tweetId))
 
-    def getNewsFeed(self, userId: int):
-        # Initialize a counter to keep track of the number of tweets added to the news feed.
-        count = 0
+  def getNewsFeed(self, userId: int):
+    # Initialize a counter to keep track of the number of tweets added to the news feed.
+    count = 0
 
-        # Initialize an empty list to store the tweets that will be returned as the user's news feed.
-        feed = []
+    # Initialize an empty list to store the tweets that will be returned as the user's news feed.
+    feed = []
 
-        # Loop backwards through the posts list (from most recent to least recent).
-        # 
-        #      [(1, 5), (2, 6),   ...,     (7323, 4323)]
-        #  -1     0        1            len(self.posts) - 1
-        #  ( ) <-------<--------<------<----------^
-        for i in range(len(self.posts) - 1, -1, -1):
-            # Break out of the loop if 10 tweets have already been added to the news feed.
-            if count >= 10:
-                break
-            
-            # Fetch the current tweet.
-            post = self.posts[i]
-            
-            if (
-                post[0] == userId                               # If the tweet was posted by the user
-                or post[0] in self.userId2Followees[userId]     # or by someone the user follows
-            ):
-                # then add it to the news feed.
-                feed.append(post[1])
-                count += 1
+    # Loop backwards through the posts list (from most recent to least recent).
+    # 
+    #      [(1, 5), (2, 6),   ...,     (7323, 4323)]
+    #  -1     0        1            len(self.posts) - 1
+    #  ( ) <-------<--------<------<----------^
+    for i in range(len(self.posts) - 1, -1, -1):
+      # Break out of the loop if 10 tweets have already been added to the news feed.
+      if count >= 10:
+        break
+      
+      # Fetch the current tweet.
+      post = self.posts[i]
+      
+      if (
+        post[0] == userId                               # If the tweet was posted by the user
+        or post[0] in self.userId2Followees[userId]     # or by someone the user follows
+      ):
+        # then add it to the news feed.
+        feed.append(post[1])
+        count += 1
 
-        # Return the news feed.
-        return feed
+    # Return the news feed.
+    return feed
 
-    def follow(self, followerId: int, followeeId: int) -> None:
-        # Add the followeeId to the set of users that the followerId user is following.
-        self.userId2Followees[followerId].add(followeeId)
+  def follow(self, followerId: int, followeeId: int) -> None:
+    # Add the followeeId to the set of users that the followerId user is following.
+    self.userId2Followees[followerId].add(followeeId)
 
-    def unfollow(self, followerId: int, followeeId: int) -> None:
-        # If the followerId user is following the followeeId user, remove the followeeId from the set.
-        if followeeId in self.userId2Followees[followerId]:
-            self.userId2Followees[followerId].remove(followeeId)
-
+  def unfollow(self, followerId: int, followeeId: int) -> None:
+    # If the followerId user is following the followeeId user, remove the followeeId from the set.
+    if followeeId in self.userId2Followees[followerId]:
+      self.userId2Followees[followerId].remove(followeeId)
 ```
 
 Let's analyze the time and space complexity for each method:
