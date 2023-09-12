@@ -1,4 +1,4 @@
-# [391. Perfect Rectangle](https://leetcode.com/problems/perfect-rectangle/description/)
+# <a href="https://leetcode.com/problems/perfect-rectangle/description/" target="_blank">391. Perfect Rectangle</a>
 
 ## Problem
 
