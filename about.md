@@ -16,7 +16,7 @@ title: About
     a. Name it "_posts/YYYY-MM-DD-post-title.md"
    
     b. Add front-matter
-    ```
+    ```yml
     ---
     layout: post # not sure if you need this for sure
     title: Title
