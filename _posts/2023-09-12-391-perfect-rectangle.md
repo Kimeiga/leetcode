@@ -1,4 +1,9 @@
-# <a href="https://leetcode.com/problems/perfect-rectangle/description/" target="_blank">391. Perfect Rectangle</a>
+---
+layout: post
+title: 391. Perfect Rectangle
+---
+
+<a href="https://leetcode.com/problems/perfect-rectangle/description/" target="_blank">Leetcode Link</a>
 
 ## Problem
 
