@@ -128,7 +128,7 @@ In this Python solution, we utilize the properties of sets and the efficiency an
 
 
 # Code
-```
+```python
 class Solution:
     def isRectangleCover(self, rectangles: List[List[int]]) -> bool:
       if not rectangles:
