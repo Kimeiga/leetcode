@@ -130,34 +130,33 @@ In this Python solution, we utilize the properties of sets and the efficiency an
 # Code
 ```python
 class Solution:
-    def isRectangleCover(self, rectangles: List[List[int]]) -> bool:
-      if not rectangles:
-          return False
+  def isRectangleCover(self, rectangles: List[List[int]]) -> bool:
+    if not rectangles:
+      return False
 
-      x1, y1 = float('inf'), float('inf')
-      x2, y2 = float('-inf'), float('-inf')
-      corners = set()
-      area = 0
+    x1, y1 = float('inf'), float('inf')
+    x2, y2 = float('-inf'), float('-inf')
+    corners = set()
+    area = 0
 
-      for rect in rectangles:
-          x1 = min(rect[0], x1)
-          y1 = min(rect[1], y1)
-          x2 = max(rect[2], x2)
-          y2 = max(rect[3], y2)
-          
-          area += (rect[2] - rect[0]) * (rect[3] - rect[1])
-          
-          for point in [(rect[0], rect[1]), (rect[0], rect[3]), (rect[2], rect[3]), (rect[2], rect[1])]:
-              if point in corners:
-                  corners.remove(point)
-              else:
-                  corners.add(point)
+    for rect in rectangles:
+      x1 = min(rect[0], x1)
+      y1 = min(rect[1], y1)
+      x2 = max(rect[2], x2)
+      y2 = max(rect[3], y2)
+      
+      area += (rect[2] - rect[0]) * (rect[3] - rect[1])
+      
+      for point in [(rect[0], rect[1]), (rect[0], rect[3]), (rect[2], rect[3]), (rect[2], rect[1])]:
+        if point in corners:
+          corners.remove(point)
+        else:
+          corners.add(point)
 
-      if {(x1, y1), (x1, y2), (x2, y1), (x2, y2)} != corners:
-          return False
+    if {(x1, y1), (x1, y2), (x2, y1), (x2, y2)} != corners:
+      return False
 
-      return area == (x2 - x1) * (y2 - y1)
-
+    return area == (x2 - x1) * (y2 - y1)
 ```
 
 ### Time Complexity:
