@@ -1,4 +1,4 @@
-# <a href="https://leetcode.com/problems/design-twitter/description/" target="_blank">355 Design Twitter</a>
+# <a href="https://leetcode.com/problems/design-twitter/description/" target="_blank">355. Design Twitter</a>
 
 ## Problem
 
