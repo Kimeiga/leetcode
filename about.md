@@ -1,4 +1,9 @@
-# How this site was made
+---
+layout: page
+title: About
+---
+
+## How this site was made
 
 1. Make new repository
 
