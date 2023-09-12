@@ -1,3 +1,3 @@
-remote_theme: alshedivat/al-folio
+remote_theme: poole/hyde
 al-folio:
   enable-dark-mode: true
