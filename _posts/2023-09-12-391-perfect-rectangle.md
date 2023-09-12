@@ -88,28 +88,26 @@ title: 391. Perfect Rectangle
       ```
       - This updates the minimum values for the bottom-left corner and the maximum values for the top-right corner.
 
-![Group 6.jpg](https://assets.leetcode.com/users/images/19b0dc90-96b1-421c-9071-156494a5a06f_1694551316.8918238.jpeg)
+   b. **Updates the total area**:
+      ```python
+      area += (rect[2] - rect[0]) * (rect[3] - rect[1])
+      ```
+      - Adds the area of the current rectangle to the total area.
 
+   c. **Handles the corners of the current rectangle**:
+      ```python
+      for point in [(rect[0], rect[1]), (rect[0], rect[3]), (rect[2], rect[3]), (rect[2], rect[1])]:
+          if point in corners:
+              corners.remove(point)
+          else:
+              corners.add(point)
+      ```
+      - The four corners of the current rectangle are created as tuples.
+      - The loop checks each corner: 
+          - If the corner is already in the `corners` set, it is removed.
+          - If it's not, it's added to the set. 
+      - This ensures that corners appearing twice are eliminated from the set.
 
-b. **Updates the total area**:
-  - Adds the area of the current rectangle to the total area.
-  ```python
-  area += (rect[2] - rect[0]) * (rect[3] - rect[1])
-  ```
-
-c. **Handles the corners of the current rectangle**:
-   - The four corners of the current rectangle are created as tuples.
-   - The loop checks each corner: 
-       - If the corner is already in the `corners` set, it is removed.
-       - If it's not, it's added to the set. 
-   - This ensures that corners appearing twice are eliminated from the set.
-  ```python
-  for point in [(rect[0], rect[1]), (rect[0], rect[3]), (rect[2], rect[3]), (rect[2], rect[1])]:
-      if point in corners:
-          corners.remove(point)
-      else:
-          corners.add(point)
-  ```
 3. **Final Checks**:
 
    a. **Check the four corners of the large rectangle**:
@@ -127,8 +125,7 @@ c. **Handles the corners of the current rectangle**:
 
 ### Summary:
 
-In this Python solution, we utilize the properties of sets and the efficiency and clarity of tuples to determine if the given rectangles can form a large rectangle without overlaps or gaps. The logic is similar to [hu19's Java solution](https://leetcode.com/problems/perfect-rectangle/solutions/87181/really-easy-understanding-solution-o-n-java/), but the use of tuples makes the code more concise and readable.
-
+In this Python solution, we utilize the properties of sets and the efficiency and clarity of tuples to determine if the given rectangles can form a large rectangle without overlaps or gaps. The logic is similar to the Java solution, but the use of tuples makes the code more concise and readable.
 
 # Code
 ```python
