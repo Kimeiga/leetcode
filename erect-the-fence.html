@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Orientation Visualization</title>
+	<style>
+		.draggable {
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<svg width="500" height="500" style="border: 1px solid black;">
+		<line id="line-pq" x1="100" y1="100" x2="400" y2="100" stroke="black" />
+		<line id="line-qr" x1="400" y1="100" x2="250" y2="250" stroke="black" />
+
+		<circle id="p" cx="100" cy="100" r="5" fill="red" class="draggable" />
+		<circle id="q" cx="400" cy="100" r="5" fill="green" class="draggable" />
+		<circle id="r" cx="250" cy="250" r="5" fill="blue" class="draggable" />
+
+		<text id="p-text" x="100" y="90">P(100, 100)</text>
+		<text id="q-text" x="400" y="90">Q(400, 100)</text>
+		<text id="r-text" x="250" y="240">R(250, 250)</text>
+	</svg>
+	<p>Orientation value: <span id="orientation-value">0</span></p>
+
+	<script>
+		let selectedCircle = null;
+
+		document.querySelectorAll(".draggable").forEach(circle => {
+			circle.addEventListener("mousedown", function (e) {
+				selectedCircle = e.target;
+			});
+		});
+
+		window.addEventListener("mousemove", function (e) {
+			if (!selectedCircle) return;
+
+			const rect = selectedCircle.parentElement.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+
+			selectedCircle.setAttribute("cx", x);
+			selectedCircle.setAttribute("cy", y);
+
+			updateTextPosition(selectedCircle);
+			updateOrientation();
+			updateLines();
+		});
+
+		window.addEventListener("mouseup", function () {
+			selectedCircle = null;
+		});
+
+		function updateTextPosition(circle) {
+			const text = document.getElementById(circle.id + "-text");
+			text.setAttribute('x', circle.getAttribute("cx"));
+			text.setAttribute('y', circle.getAttribute("cy") - 10);
+			text.textContent = `${circle.id.toUpperCase()}(${circle.getAttribute("cx")}, ${circle.getAttribute("cy")})`;
+		}
+
+		function orientation(p, q, r) {
+			return (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+		}
+		function updateOrientation() {
+			const p = {
+				x: parseFloat(document.getElementById('p').getAttribute("cx")),
+				y: parseFloat(document.getElementById('p').getAttribute("cy"))
+			};
+			const q = {
+				x: parseFloat(document.getElementById('q').getAttribute("cx")),
+				y: parseFloat(document.getElementById('q').getAttribute("cy"))
+			};
+			const r = {
+				x: parseFloat(document.getElementById('r').getAttribute("cx")),
+				y: parseFloat(document.getElementById('r').getAttribute("cy"))
+			};
+
+			const val = orientation(p, q, r);
+			document.getElementById('orientation-value').textContent = val;
+		}
+
+
+		function updateLines() {
+			const p = document.getElementById('p');
+			const q = document.getElementById('q');
+
+			document.getElementById('line-pq').setAttribute('x1', p.getAttribute("cx"));
+			document.getElementById('line-pq').setAttribute('y1', p.getAttribute("cy"));
+			document.getElementById('line-pq').setAttribute('x2', q.getAttribute("cx"));
+			document.getElementById('line-pq').setAttribute('y2', q.getAttribute("cy"));
+
+			document.getElementById('line-qr').setAttribute('x1', q.getAttribute("cx"));
+			document.getElementById('line-qr').setAttribute('y1', q.getAttribute("cy"));
+			document.getElementById('line-qr').setAttribute('x2', r.getAttribute("cx"));
+			document.getElementById('line-qr').setAttribute('y2', r.getAttribute("cy"));
+		}
+	</script>
+</body>
+
+</html>
